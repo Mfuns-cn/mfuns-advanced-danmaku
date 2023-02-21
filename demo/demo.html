@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./demo.css" />
+    <meta charset="UTF-8" />
+    <title>弹幕播放测试</title>
+  </head>
+  <body>
+    <div class="box">
+      <div id="container"></div>
+      <button onclick="engine.reload()">重载弹幕</button>
+      <span>|</span>
+      <button onclick="engine.play()">播放</button>
+      <button onclick="engine.pause()">暂停</button>
+      <button onclick="engine.reset()">重置</button>
+      <button onclick="engine.seek(seekTime.value)">跳转</button>
+      <input type="number" id="seekTime" value="0" />
+      <span id="time">time</span>
+    </div>
+  </body>
+  <script src="../lib/mfuns-advanced-danmaku.js"></script>
+  <script>
+    let danmakuList = [];
+    let time = document.getElementById("time");
+    let seekTime = document.getElementById("seekTime");
+    let engine = new MfunsAdvancedDanmaku({
+      container: document.getElementById("container"),
+      getDanmaku: (send) => {
+        return danmakuList;
+      },
+    });
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "demo.json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        danmakuList = JSON.parse(xhr.responseText);
+      }
+      engine.reload();
+    };
+    xhr.send();
+
+    setInterval(() => {
+      time.innerText = engine.time();
+    }, 100);
+  </script>
+</html>

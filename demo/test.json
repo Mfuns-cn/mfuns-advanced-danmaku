@@ -1,0 +1,33 @@
+{
+  "content": "Hello",
+  "size": 40,
+  "color": "#000000",
+  "bold": false,
+  "font": "SimHei",
+  "layer": 50,
+  "x": 200,
+  "y": 800,
+  "anchor": [0.5, 0.5],
+  "animations": [
+    {
+      "duration": 1000
+    },
+    {
+      "duration": 5000,
+      "x": 800,
+      "y": 200,
+      "rotateZ": 360
+    },
+    {
+      "duration": 2000,
+      "rotateX": 290,
+      "rotateY": 180,
+      "rotateZ": 360
+    },
+    {
+      "duration": 5000,
+      "x": 200,
+      "y": 200
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1675585488108,
+    "content": "{\r\n  \"content\": \"23333\",\r\n  \"size\": 40,\r\n  \"color\": \"#FF0000\",\r\n  \"bold\": true,\r\n  \"font\": \"SimHei\",\r\n  \"layer\": 48,\r\n  \"x\": 300,\r\n  \"y\": 500,\r\n  \"anchor\": [1, 0.5],\r\n  \"animations\": [\r\n    {\r\n      \"duration\": 2000,\r\n      \"rotateX\": 290,\r\n      \"rotateY\": 180,\r\n      \"rotateZ\": 200\r\n    },\r\n    {\r\n      \"duration\": 5000,\r\n      \"x\": [500, 800],\r\n      \"y\": 200,\r\n      \"rotateZ\": 360,\r\n      scaleX: 1.4\r\n    }\r\n  ]\r\n}",
+    "time": 2000
+  },
+  {
+    "id": 1675585547748,
+    "content": "[{\r\n  \"id\": \"a\",\r\n  \"content\": \"Hello\",\r\n  \"size\": 40,\r\n  \"color\": \"#000000\",\r\n  \"bold\": false,\r\n  \"font\": \"SimHei\",\r\n  \"layer\": 50,\r\n  \"x\": 200,\r\n  \"y\": 800,\r\n  \"anchor\": [0.5, 0.5],\r\n  \"animations\": [\r\n    {\r\n      \"duration\": 1000\r\n    },\r\n    {\r\n      \"duration\": 5000,\r\n      \"x\": 800,\r\n      \"y\": 200,\r\n      \"rotateZ\": 360,\r\n      loop: 4\r\n    },\r\n    {\r\n      type: \"group\",\r\n      animations: [\r\n        {\r\n          \"duration\": 2000,\r\n          \"rotateX\": 290,\r\n          \"rotateY\": 180,\r\n          \"rotateZ\": 360\r\n        },\r\n        {\r\n          \"duration\": 5000,\r\n          \"x\": 200,\r\n          \"y\": 200\r\n        }\r\n      ],\r\n      loop: 5\r\n    },\r\n  ]\r\n},\r\n{\r\n  content: \"test\",\r\n  extend: \"a\",\r\n  then: \"a\",\r\n  delay: -8000,\r\n  duration: 4000,\r\n}\r\n\r\n]",
+    "time": 0
+  },
+  {
+    "id": 1675585787310,
+    "content": "{\r\n  \"content\": \"好耶\",\r\n  \"size\": 40,\r\n  \"color\": \"#FF0000\",\r\n  \"bold\": true,\r\n  \"font\": \"Microsoft Yahei\",\r\n  \"layer\": 50,\r\n  y: 200,\r\n  \"anchor\": [0.5, 0.5],\r\n  \"animations\": [\r\n    {\r\n      \"duration\": 1000,\r\n      x: [1920, 0],\r\n      loop: 50\r\n    },\r\n  ]\r\n}",
+    "time": 3904
+  }
+]

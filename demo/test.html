@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./test.css" />
+    <title>弹幕编辑测试</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <div id="editor"></div>
+    <div class="box">
+      <div id="container"></div>
+      <button onclick="send()">发送弹幕</button>
+      <button onclick="save()">生成播放器弹幕格式</button>
+      <span>|</span>
+      <button onclick="engine.play()">播放</button>
+      <button onclick="engine.pause()">暂停</button>
+      <button onclick="engine.reset()">重置</button>
+      <button onclick="engine.seek(seekTime.value)">跳转</button>
+      <input type="number" id="seekTime" value=0 />
+      <span id="time">time</span>
+      <span id="msg" style="padding-left: 40px;"></span>
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.15.0/ace.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.15.0/mode-json5.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/json5/2.2.3/index.min.js"></script>
+  <script src="../lib/mfuns-advanced-danmaku.js"></script>
+  <script>
+    let time = document.getElementById("time");
+    let engine = new MfunsAdvancedDanmaku({
+      container: document.getElementById("container"),
+    });
+    engine.play()
+
+    let n = 0
+    
+    let editor = ace.edit("editor")
+    editor.setOptions({
+      mode: "ace/mode/json5",
+      tabSize: 2,
+      fontSize: 14,
+    });
+
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "test.json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        editor.setValue(xhr.responseText);
+      }
+    };
+    xhr.send();
+
+    function send() {
+      try {
+        let value = editor.getValue()
+        d = JSON5.stringify(JSON5.parse(value))
+        n++
+        let danmaku = {
+          id: n,
+          content: value,
+          time: engine.time()
+        }
+        engine.playDanmaku(danmaku)
+        message("弹幕已发送")
+      } catch (error) {
+        console.error(error)
+        message("弹幕格式错误")
+      }
+    }
+    function save() {
+      let value = editor.getValue()
+      console.log(value)
+      let d = JSON5.parse(value)
+      try {
+        let danmaku = {
+          id: Date.now(),
+          content: value,
+          time: d.start == undefined ? engine.time() : d.start
+        }
+        copy(JSON.stringify(danmaku, null, 2))
+        message("已复制到剪贴板")
+      } catch (error) {
+        message("弹幕格式错误")
+      }
+    }
+
+    let msg = document.getElementById("msg")
+    let t
+    function message(m) {
+      clearTimeout(t)
+      this.msg.innerText = m
+      t = setTimeout(() => {
+        this.msg.innerText = ""
+      }, 3000)
+    }
+
+    function copy(str) {
+      let transfer = document.createElement('textarea');
+      container.appendChild(transfer);
+      transfer.value = str;  // 这里表示想要复制的内容
+      transfer.focus();
+      transfer.select();
+      if (document.execCommand('copy')) {
+          document.execCommand('copy');
+      }
+      transfer.blur();
+      console.log('复制成功');
+      container.removeChild(transfer);
+    }
+
+    setInterval(() => {
+      time.innerText = engine.time();
+    }, 100);
+  </script>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "mfuns-advanced-danmaku",
+  "version": "1.0.0",
+  "description": "Mfuns高级弹幕引擎",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production && tsc",
+    "watch": "webpack --watch --mode=development",
+    "lint:fix": "tslint -c tslint.json 'src/**/*.ts' --fix"
+  },
+  "author": "Minteea",
+  "license": "MIT",
+  "dependencies": {
+    "json5": "^2.2.3",
+    "webpack": "^5.73.0"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.9.5",
+    "webpack-cli": "^4.10.0"
+  }
+}
